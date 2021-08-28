@@ -1,3 +1,5 @@
+require("dotenv").config()
+
 // install express with `npm install express`
 const express = require('express')
 const shortId = require('shortid')
@@ -40,3 +42,4 @@ app.get('/:shortUrl', async (req, res) => {
 
 // export 'app'
 module.exports = app
+// app.listen(3000)
