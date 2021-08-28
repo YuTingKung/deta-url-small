@@ -1,6 +1,7 @@
 // install express with `npm install express`
 const express = require('express')
 const shortId = require('shortid')
+var { nanoid } = require("nanoid");
 const app = express()
 
 app.set('view engine', 'ejs')
@@ -22,7 +23,7 @@ app.get('/', async (req, res) => {
 app.post('/shortUrls', async (req, res) => {
     await db.put({ 
         full: req.body.fullUrl,
-        short: shortId.generate(),
+        short: nanoid(5)/*shortId.generate()*/,
         clicks: 0
     })
     res.redirect('/')
