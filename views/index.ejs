@@ -45,9 +45,6 @@
 
 <script>
     function copyToClipboard(url) {
-
-        console.warn(url);
-
         /* Get the text field */
         //var copyText = document.getElementById("myInput");
 
@@ -56,10 +53,11 @@
         //copyText.setSelectionRange(0, 99999); /* For mobile devices */
 
         /* Copy the text inside the text field */
-        navigator.clipboard.writeText(url);
-
-        /* Alert the copied text */
-        alert("Copied: " + url);
+        navigator.clipboard.writeText(url).then(function() {
+            alert("Copied: " + url);
+        }, function() {
+            alert("Copy fail!");
+        });
     }
 </script>
 
