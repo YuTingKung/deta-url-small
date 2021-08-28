@@ -16,7 +16,7 @@
     <h1 style="font: bold 36px asap,arial; color: #505050; text-align:center;">Paste the URL to be smaller</h1>
     <form action="/shortUrls" method="POST" class="my-4 form-inline">
         <label for="fullUrl" class="sr-only">Url</label>
-        <input placeholder="Enter the link here" type="url" name="fullUrl" id="fullUrl" class="form-control col mr-2">
+        <input placeholder="Enter the link here" type="url" name="fullUrl" id="fullUrl" class="form-control col mr-2" required pattern="https?://.+" >
         <button class="btn btn-success" type="submit">Smaller</button>
     </form>
 
