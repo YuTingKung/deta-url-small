@@ -1,0 +1,1 @@
+{"id":"99299fae-10e6-43b4-a79c-56183d3a5eba","space":9799,"runtime":"nodejs12.x","name":"url_small","path":"2bv6jj","project":"c0jkgouc","account":"144798365827","region":"ap-southeast-1","deps":["express@^4.17.1","shortid@^2.2.16","deta@^1.0.0","ejs@^3.1.6"],"envs":null,"public":true,"log_level":"debug","cron":""}
