@@ -35,11 +35,11 @@ app.post('/shortUrls', async (req, res) => {
 
 app.get('/:shortUrl', async (req, res) => {  
     const result = await db.fetch({ short: req.params.shortUrl});
-    const shortUrl = result.items === [] ? [] : result.items[0];
-    if (shortUrl === []) return res.sendStatus(404)
-    const toUpdate = { clicks: result.items[0].clicks + 1 };
-    await db.update(toUpdate, result.items[0].key);
-    res.redirect(shortUrl.full)
+    if (result.count == 0) return res.render('404', { text: 'Please make sure that the capitalization and spelling of the URL is all correct' });
+    const item = result.items[0];
+    const toUpdate = { clicks: item.clicks + 1 };
+    await db.update(toUpdate, item.key);
+    res.redirect(item.full);
 })
 
 // export 'app'
