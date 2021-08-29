@@ -3,7 +3,8 @@ require("dotenv").config()
 // install express with `npm install express`
 const express = require('express')
 const shortId = require('shortid')
-var { nanoid } = require("nanoid");
+var { customAlphabet } = require("nanoid");
+const nanoid = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 5)
 const app = express()
 
 app.set('view engine', 'ejs')
@@ -25,7 +26,7 @@ app.get('/', async (req, res) => {
 app.post('/shortUrls', async (req, res) => {
     item = { 
         full: req.body.fullUrl,
-        short: nanoid(5)/*shortId.generate()*/,
+        short: nanoid()/*shortId.generate()*/,
         clicks: 0
     };
     items = [ item ];
