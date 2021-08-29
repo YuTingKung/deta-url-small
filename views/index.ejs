@@ -84,7 +84,19 @@
                 submitButton.removeAttribute("disabled");
                 submitButton.innerText = 'Smaller';
                 $(".content").html(res);
-            }
+            },
+            error: function(res) {
+                // Whatever you want to do after the form is successfully submitted
+                swal.fire({
+                    icon: 'error',
+                    title: 'Smaller Error',
+                    text: "",
+                    timer: 2000,
+                    showConfirmButton: false
+                })
+                submitButton.removeAttribute("disabled");
+                submitButton.innerText = 'Smaller';
+            },
         });
     });
 

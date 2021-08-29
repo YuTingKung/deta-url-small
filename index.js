@@ -30,6 +30,8 @@ app.post('/shortUrls', async (req, res) => {
         clicks: 0
     };
     items = [ item ];
+    const result = await db.fetch({ short: item.short });
+    if(item.full.includes('deta.dev') || result.count > 0) res.sendStatus(404);
     await db.put(item);
     res.render('table', { shortUrls: items })
 })
