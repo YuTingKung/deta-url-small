@@ -23,12 +23,14 @@ app.get('/', async (req, res) => {
 })
 
 app.post('/shortUrls', async (req, res) => {
-    await db.put({ 
+    item = { 
         full: req.body.fullUrl,
         short: nanoid(5)/*shortId.generate()*/,
         clicks: 0
-    })
-    res.redirect('/')
+    };
+    items = [ item ];
+    await db.put(item);
+    res.render('table', { shortUrls: items })
 })
 
 app.get('/:shortUrl', async (req, res) => {  

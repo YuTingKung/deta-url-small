@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=0.9">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="icon" href="https://img.icons8.com/material-two-tone/24/000000/puzzle--v1.png" type="image/x-icon">
     <title>Small</title>
 </head>
 <body style="background-color: #f9f9f9;">
@@ -14,7 +15,7 @@
     
     <div class="container">
     <h1 style="font: bold 36px asap,arial; color: #505050; text-align:center;">Paste the URL to be smaller</h1>
-    <form id="formID" action="/shortUrls" method="POST" class="my-4 form-inline">
+    <form id="formID" onsubmit="return false;" class="my-4 form-inline">
         <label for="fullUrl" class="sr-only">Url</label>
         <input placeholder="Enter the link here" type="url" name="fullUrl" id="fullUrl" class="form-control col mr-2" required pattern="https?://.+" >
         <button id="submitID" class="btn btn-success" type="submit">Smaller</button>
@@ -43,6 +44,7 @@
     </table>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
 <script async src="https://unpkg.com/sweetalert2/dist/sweetalert2.min.js"></script>
 <link async rel="stylesheet" href="https://unpkg.com/sweetalert2/dist/sweetalert2.min.css">
 <script src="https://cdn.rawgit.com/zenorocha/clipboard.js/v1.7.1/dist/clipboard.min.js"></script>
@@ -55,11 +57,34 @@
 
         // Disable the submit button
         submitButton.setAttribute('disabled', 'disabled');
-
+        submitButton.innerText = 'Sending...';
         // Change the "Submit" text
         submitButton.value = 'Please wait...';
                 
     }, false);
+
+    $('#formID').submit(function(e){
+        e.preventDefault();
+        $.ajax({
+            url: '/shortUrls',
+            type: 'post',
+            data: $('#formID').serialize(),
+            success: function(res) {
+                // Whatever you want to do after the form is successfully submitted
+                swal.fire({
+                    icon: 'success',
+                    title: 'Smaller Success',
+                    text: "",
+                    timer: 2000,
+                    showConfirmButton: false
+                })
+                
+                submitButton.removeAttribute("disabled");
+                submitButton.innerText = 'Smaller';
+                $("table").html(res);
+            }
+        });
+    });
 
     var clipboard = new Clipboard('.copy', {
         text: function(trigger) {
@@ -71,8 +96,8 @@
     clipboard.on('success', function(e) {
         swal.fire({
             icon: 'success',
-            title: e.text,
-            text: "Copy Success",
+            title: "Copy Success",
+            text: e.text,
             timer: 2000,
             showConfirmButton: false
         })

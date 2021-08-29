@@ -1,0 +1,21 @@
+<table class="table table-striped table-bordered table-sm">
+    <thead>
+        <tr>
+            <th>Full URL</th>
+            <th>Short URL</th>
+            <th>Clicks</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% shortUrls.forEach(shortUrl => { %> 
+            <tr>
+                <td style="max-width:150px; word-wrap:break-word;"><a href="<%= shortUrl.full %>"><%= shortUrl.full %></a></td>
+                <td>
+                    <button class="copy btn-success btn-sm" data-clipboard-text="<%= shortUrl.short %>" onclick="copyToClipboard(`${window.location.origin}/<%= shortUrl.short %>`)">Copy</button>
+                    <a href="<%= shortUrl.short %>"><%= shortUrl.short %></a>
+                </td>
+                <td><%= shortUrl.clicks %></td>
+            </tr>
+        <% }) %>  
+    </tbody>
+</table>
