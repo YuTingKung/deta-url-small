@@ -19,3 +19,22 @@
         <% }) %>  
     </tbody>
 </table>
+
+<div class="grid-container" style="display: grid;
+grid-template-columns: 57% 43%;">
+<div style="display: flex; justify-content: flex-end;" id="qrcode" value="<%= shortUrls[0].short %>"></div>
+<a id="download" href="" download="qrcode" style="display: flex; margin: 60px 0px 60px 30px;"><button type="button" class="btn btn-info btn-sm mt-1">Download</button></a>
+</div>
+
+<script type="text/javascript">
+    var qrcode = new QRCode(document.getElementById("qrcode"),{
+        text: `${window.location.origin}/${document.getElementById("qrcode").getAttribute('value')}`,
+        width: 150,
+        height: 150,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+    });
+    var base64 = qrcode._oDrawing._elCanvas.toDataURL("image/png");
+    $("#download").attr('href', base64);
+</script>
