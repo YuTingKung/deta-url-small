@@ -42,7 +42,7 @@ app.post('/shortUrls', async (req, res) => {
 
 app.get('/:shortUrl', async (req, res) => {  
     const result = await db.fetch({ short: req.params.shortUrl});
-    if (result.count == 0) return res.render('404', { text: 'Please make sure that the capitalization and spelling of the URL is all correct' });
+    if (result.count == 0) return res.render('404', { text: '404 PAGE NOT FOUND' });
     const item = result.items[0];
     const toUpdate = { clicks: item.clicks + 1 };
     await db.update(toUpdate, item.key);
