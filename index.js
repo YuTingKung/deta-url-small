@@ -18,6 +18,10 @@ const deta = Deta(process.env.PROJECT_KEY)
 // name your DB
 const db = deta.Base("urls")
 
+app.get('/googlebdecb3304e91f045.html', (req, res) => {
+    res.render('googlebdecb3304e91f045', {})
+})
+
 app.get('/', async (req, res) => {
     const shortUrls = await db.fetch({});
     res.render('index', { shortUrls: shortUrls.items })
