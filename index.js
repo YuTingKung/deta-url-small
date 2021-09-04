@@ -8,6 +8,7 @@ const nanoid = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklm
 const app = express()
 
 app.set('view engine', 'ejs')
+app.use(express.static('public'));
 app.use(express.urlencoded({ extended:false }))
 app.use(express.json()) // for parsing application/json bodies
 
@@ -50,5 +51,5 @@ app.get('/:shortUrl', async (req, res) => {
 })
 
 // export 'app'
-module.exports = app
-// app.listen(3000)
+// module.exports = app
+app.listen(3000)
